@@ -28,7 +28,7 @@ class InfoObject {
   constructor(objectNumber, objectType, objectDescription, parentNumber) {
     this.objectNumber = objectNumber;
     this.objectType = objectType;
-    this.objectDescription= objectDescription
+    this.objectDescription = objectDescription
     // This was added later, to test if I could append info
     this.parentNumber = parentNumber;
   }
@@ -47,18 +47,18 @@ function parse(array) {
 
     let nr = substrings[0];
     let type = substrings[1];
-    let objectDescription = substrings[2];
+    let description = substrings[2];
 
     if(type === "O") {
       lastOrder = nr;
-      object = new InfoObject(nr, type, objectDescription, parseInt(lastObjectNr));
+      object = new InfoObject(nr, type, description, parseInt(lastObjectNr));
     }
     if (type === "S") {
       lastObjectNr = nr;
-      object = new InfoObject(nr, type, objectDescription, 0);
+      object = new InfoObject(nr, type, description, 0);
     }
     if (type === "P") {
-      object = new InfoObject(nr, type, objectDescription, parseInt(lastOrder));
+      object = new InfoObject(nr, type, description, parseInt(lastOrder));
     }
     arrayOfObjects.push(object);
       })
@@ -76,7 +76,7 @@ function parse(array) {
 
     let nr = substrings[0];
     let type = substrings[1];
-    let objectDescription = substrings[2];
+    let description = substrings[2];
 
 	if (lastLevel.includes(type)) {
 		parentNr[lastLevel.indexOf(type)] = nr;
@@ -85,7 +85,7 @@ function parse(array) {
 		parentNr.push(nr);
 	}
 
-  return new InfoObject(nr, type, objectDescription, parseInt(parentNr[lastLevel.indexOf(type)-1]));
+  return new InfoObject(nr, type, description, parseInt(parentNr[lastLevel.indexOf(type)-1]));
   })
   
 return objects;
